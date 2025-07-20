@@ -24,17 +24,17 @@ int main(int argc, char **argv) {
     top->reset = 0;
 
     // Initialize register file
-    top->regfile[1] = 32'd10;
-    top->regfile[2] = 32'd5;
-    top->regfile[5] = 32'd0;
+    top->regfile[1] = 0x0000000A; // 10 decimal
+    top->regfile[2] = 0x00000005; // 5 decimal
+    top->regfile[5] = 0x00000000; // 0 decimal
     // Initialize data memory: dmem[1] = 100
-    top->dmem[1] = 32'd100;
+    top->dmem[1] = 0x00000064; // 100 decimal
     // Load instructions into imem
-    top->imem[0] = 32'b000000_00001_00010_00011_00000_000000; // ADD R3, R1, R2
-    top->imem[1] = 32'b000001_00001_00010_00100_00000_000000; // CMP R4, R1, R2
-    top->imem[2] = {6'b100011, 5'd5, 5'd6, 16'd4};            // LOAD R6, 4(R5)
-    top->imem[3] = {6'b101011, 5'd5, 5'd6, 16'd8};            // STORE R6, 8(R5)
-    top->imem[4] = {6'b000010, 26'd1};                        // JUMP offset=1
+    top->imem[0] = 0x00223000; // 000000_00001_00010_00011_00000_000000
+    top->imem[1] = 0x04222000; // 000001_00001_00010_00100_00000_000000
+    top->imem[2] = 0x8CA60004; // LOAD R6, 4(R5)
+    top->imem[3] = 0xACA60008; // STORE R6, 8(R5)
+    top->imem[4] = 0x08000001; // JUMP offset=1
     // Dump after initialization
     top->eval(); tfp->dump(2);
 
