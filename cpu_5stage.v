@@ -1,4 +1,5 @@
 // 5‐stage pipeline CPU 支援 LOAD, STORE, ADD, CMP, JUMP
+/* verilator lint_off CASEINCOMPLETE */
 module CPU_5Stage(
   input         clk,
   input         reset
