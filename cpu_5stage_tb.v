@@ -1,17 +1,17 @@
-module cpu_5stage_tb;
-  reg clk, reset;
+module cpu_5stage_tb(
+  input clk,
+  input reset
+);
   // Instantiate the 5‐stage CPU
   CPU_5Stage UUT (
     .clk(clk),
     .reset(reset)
   );
 
-  // Clock driven by C++ Verilator testbench
+  // clk and reset driven by C++ Verilator harness
 
-  // Test sequence
+  // Memory and register initialization
   initial begin
-    // reset controlled by C++ testbench
-
     // 2) 初始化 register file
     UUT.regfile[1] = 32'd10;
     UUT.regfile[2] = 32'd5;
