@@ -1,12 +1,12 @@
 #include <verilated.h>
 #include <verilated_vcd_c.h>
-#include "Vcpu_5stage.h"
+#include "Vcpu_5stage_tb.h"
 
 int main(int argc, char **argv) {
     Verilated::commandArgs(argc, argv);
     // Trace configuration
     Verilated::traceEverOn(true);
-    Vcpu_5stage* top = new Vcpu_5stage;
+    Vcpu_5stage_tb* top = new Vcpu_5stage_tb;
     VerilatedVcdC* tfp = new VerilatedVcdC;
     top->trace(tfp, 99);
     tfp->open("cpu_5stage.vcd");
@@ -23,19 +23,8 @@ int main(int argc, char **argv) {
     tfp->dump(1);
     top->reset = 0;
 
-    // Initialize register file
-    top->regfile[1] = 0x0000000A; // 10 decimal
-    top->regfile[2] = 0x00000005; // 5 decimal
-    top->regfile[5] = 0x00000000; // 0 decimal
-    // Initialize data memory: dmem[1] = 100
-    top->dmem[1] = 0x00000064; // 100 decimal
-    // Load instructions into imem
-    top->imem[0] = 0x00223000; // 000000_00001_00010_00011_00000_000000
-    top->imem[1] = 0x04222000; // 000001_00001_00010_00100_00000_000000
-    top->imem[2] = 0x8CA60004; // LOAD R6, 4(R5)
-    top->imem[3] = 0xACA60008; // STORE R6, 8(R5)
-    top->imem[4] = 0x08000001; // JUMP offset=1
-    // Dump after initialization
+    // Memory and instruction initialization now handled by Verilog TB
+    // Initial waveform dump after reset release
     top->eval(); tfp->dump(2);
 
     // Run for N clock cycles
