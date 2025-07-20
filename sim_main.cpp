@@ -1,12 +1,12 @@
 #include <verilated.h>
 #include <verilated_vcd_c.h>
-#include "Vcpu_5stage.h"
+#include "Vcpu_5stage_tb.h"
 
 int main(int argc, char **argv) {
     Verilated::commandArgs(argc, argv);
     // Trace configuration
     Verilated::traceEverOn(true);
-    Vcpu_5stage* top = new Vcpu_5stage;
+    Vcpu_5stage_tb* top = new Vcpu_5stage_tb;
     VerilatedVcdC* tfp = new VerilatedVcdC;
     top->trace(tfp, 99);
     tfp->open("cpu_5stage.vcd");
