@@ -90,8 +90,8 @@ module CPU_5Stage(
 
   // ---- EX stage ----
   wire [31:0] ex_alu_in2 = id_ex_alu_src ? id_ex_imm : id_ex_reg_rt;
-  wire [31:0] ex_alu_res;
-  wire        ex_zero;
+  reg  [31:0] ex_alu_res;
+  reg         ex_zero;
   reg  [31:0] ex_target;
   // simple ALU
   always @(*) begin
