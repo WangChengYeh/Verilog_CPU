@@ -6,9 +6,7 @@ module cpu_5stage_tb;
     .reset(reset)
   );
 
-  // Clock generation
-  initial clk = 0;
-  always #5 clk = ~clk;
+  // Clock driven by C++ Verilator testbench
 
   // Test sequence
   initial begin
