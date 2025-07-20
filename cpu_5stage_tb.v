@@ -10,11 +10,7 @@ module cpu_5stage_tb;
 
   // Test sequence
   initial begin
-    // 1) Reset
-    reset = 1;
-    // 等待 1 個時鐘週期
-    @(posedge clk);
-    reset = 0;
+    // reset controlled by C++ testbench
 
     // 2) 初始化 register file
     UUT.regfile[1] = 32'd10;
@@ -36,17 +32,6 @@ module cpu_5stage_tb;
     // JUMP offset=1  (跳到 imem[5])
     UUT.imem[4] = {6'b000010, 26'd1};
 
-    // 5) 讓 CPU 執行足夠週期
-    // 等待 20 個時鐘週期
-    repeat (20) @(posedge clk);
-
-    // 6) 列印檢查結果
-    $display("R3 = %0d (expect 15)", UUT.regfile[3]);
-    $display("R4 = %0d (expect 1)",  UUT.regfile[4]);
-    $display("R6 = %0d (expect 100)",UUT.regfile[6]);
-    $display("DMEM[2] = %0d (expect 100)", UUT.dmem[2]);
-
-    $finish;
   end
 
   // Waveform dump
