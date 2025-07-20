@@ -1,3 +1,3 @@
 all:
-   # Build DUT only and use C++ testbench without Verilog delays
-   verilator --cc cpu_5stage.v --trace --exe sim_main.cpp
+	verilator --cc cpu_5stage.v --trace --exe sim_main.cpp
+	cd obj_dir ; make -f Vcpu_5stage.mk
