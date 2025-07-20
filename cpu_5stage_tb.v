@@ -13,7 +13,9 @@ module cpu_5stage_tb;
   // Test sequence
   initial begin
     // 1) Reset
-    reset = 1; #10;
+    reset = 1;
+    // 等待 1 個時鐘週期
+    @(posedge clk);
     reset = 0;
 
     // 2) 初始化 register file
@@ -37,7 +39,8 @@ module cpu_5stage_tb;
     UUT.imem[4] = {6'b000010, 26'd1};
 
     // 5) 讓 CPU 執行足夠週期
-    #200;
+    // 等待 20 個時鐘週期
+    repeat (20) @(posedge clk);
 
     // 6) 列印檢查結果
     $display("R3 = %0d (expect 15)", UUT.regfile[3]);
